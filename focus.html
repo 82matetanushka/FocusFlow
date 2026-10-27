@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FocusFlow | Focus Room</title>
+
+    <link rel="stylesheet" href="CSS/styles.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo-container">
+            <i class="fa-solid fa-leaf" style="color: rgb(113, 178, 163);"></i>
+            <h2>FocusFlow</h2>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="index.html" class="nav-link">
+                <i class="fa-solid fa-house" style="color: rgb(113, 178, 163);"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="tasks.html" class="nav-link">
+                <i class="fa-solid fa-list-check" style="color: rgb(113, 178, 163);"></i>
+                <span>Tasks</span>
+            </a>
+
+            <a href="focus.html" class="nav-link active">
+                <i class="fa-solid fa-bullseye" style="color: rgb(113, 178, 163);"></i>
+                <span>Focus Room</span>
+            </a>
+
+            <a href="habits.html" class="nav-link">
+                <i class="fa-solid fa-seedling" style="color: rgb(113, 178, 163);"></i>
+                <span>Habits</span>
+            </a>
+
+            <a href="analytics.html" class="nav-link">
+                <i class="fa-solid fa-chart-line" style="color: rgb(113, 178, 163);"></i>
+                <span>Analytics</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear"style="color: rgb(113, 178, 163);"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Small steps, big progress!</p>
+        </div>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="dashboard-header">
+
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars" style="color: rgb(113, 178, 163);"></i>
+            </button>
+
+            <div>
+                <h1>Focus Room 🎯</h1>
+                <p>Give your goals your full attention.</p>
+            </div>
+
+            <div class="header-date" id="focus-date"></div>
+
+        </header>
+
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+
+            <div>
+                <h2>It's time to focus!</h2>
+                <p>One task at a time. You are doing great.</p>
+            </div>
+
+            <div class="focus-welcome-icon">
+                <i class="fa-solid fa-brain" style="color: rgb(113, 178, 163);"></i>
+            </div>
+
+        </section>
+
+        <!-- Focus Timer -->
+        <section class="focus-layout">
+
+            <div class="focus-timer-card">
+
+                <h2>Focus Timer</h2>
+
+                <p class="focus-subtitle">
+                    Work with focus. Take breaks. Repeat.
+                </p>
+
+                <div class="timer-mode-buttons">
+                    <button class="timer-mode active" data-minutes="25">
+                        Focus
+                    </button>
+
+                    <button class="timer-mode" data-minutes="5">
+                        Short Break
+                    </button>
+
+                    <button class="timer-mode" data-minutes="15">
+                        Long Break
+                    </button>
+                </div>
+
+                <div class="timer-circle" id="timer-circle">
+
+                    <div class="timer-content">
+                        <i class="fa-solid fa-leaf" style="color: rgb(113, 178, 163);"></i>
+
+                        <h2 id="timer-display">25:00</h2>
+
+                        <p id="timer-status">Ready to focus?</p>
+                    </div>
+
+                </div>
+
+                <div class="timer-controls">
+
+                    <button id="start-timer" class="focus-button primary-button">
+                        <i class="fa-solid fa-play" style="color: rgb(113, 178, 163);"></i>
+                        Start
+                    </button>
+
+                    <button id="pause-timer" class="focus-button secondary-button" disabled>
+                        <i class="fa-solid fa-pause" style="color: rgb(113, 178, 163);"></i>
+                        Pause
+                    </button>
+
+                    <button id="reset-timer" class="focus-button reset-button">
+                        <i class="fa-solid fa-rotate-right" style="color: rgb(113, 178, 163);"></i>
+                        Reset
+                    </button>
+
+                </div>
+
+                <p class="timer-message" id="timer-message">
+                    Choose a session and start when you're ready.
+                </p>
+
+            </div>
+
+            <!-- Focus Information -->
+            <div class="focus-side-content">
+
+                <div class="focus-info-card">
+
+                    <div class="focus-card-heading">
+                        <i class="fa-solid fa-lightbulb" style="color: rgb(113, 178, 163);"></i>
+                        <h3>Focus Tips</h3>
+                    </div>
+
+                    <ul class="focus-tips">
+                        <li>Keep your phone away.</li>
+                        <li>Choose one task to complete.</li>
+                        <li>Close unnecessary browser tabs.</li>
+                        <li>Take a short break between sessions.</li>
+                        <li>Remember to drink water.</li>
+                    </ul>
+
+                </div>
+
+                <div class="focus-info-card session-card">
+
+                    <div class="focus-card-heading">
+                        <i class="fa-solid fa-chart-simple" style="color: rgb(113, 178, 163);"></i>
+                        <h3>Today's Sessions</h3>
+                    </div>
+
+                    <div class="session-stat">
+                        <span>Completed Sessions</span>
+                        <strong id="completed-sessions" >0</strong>
+                    </div>
+
+                    <div class="session-stat">
+                        <span>Focus Minutes</span>
+                        <strong id="focus-minutes">0</strong>
+                    </div>
+
+                    <p class="session-note">
+                        Every focused minute brings you closer to your goal.
+                    </p>
+
+                </div>
+
+                <div class="focus-quote-card">
+                    <i class="fa-solid fa-quote-left" style="color: rgb(113, 178, 163);"></i>
+
+                    <p>
+                        The secret of getting ahead is getting started.
+                    </p>
+
+                    <span>— Mark Twain</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Focus Instructions -->
+        <section class="focus-instructions">
+
+            <h2>How the Focus Timer Works</h2>
+
+            <div class="instruction-grid">
+
+                <div class="instruction-item">
+                    <span>01</span>
+                    <h3>Choose</h3>
+                    <p>Select a focus session or a break.</p>
+                </div>
+
+                <div class="instruction-item">
+                    <span>02</span>
+                    <h3>Concentrate</h3>
+                    <p>Work on one task until the timer ends.</p>
+                </div>
+
+                <div class="instruction-item">
+                    <span>03</span>
+                    <h3>Recharge</h3>
+                    <p>Take a break and prepare for your next session.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <footer class="dashboard-footer">
+            <p>© <span id="footer-year"></span> FocusFlow. Make every moment count.</p>
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOCUSFLOW | Personal Productivity</title>
+    <link href="CSS/styles.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0d5aa24177.js" crossorigin="anonymous"></script>
+
+</head> 
+<body>
+    <div class="app-container">
+        <!--====================================SIDEBAR=============================-->
+        <aside class="sidebar">
+            <!--Logo Section-->
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-leaf" style="color: rgb(26, 128, 96);"></i>
+                </div>
+                <div class="logo-text">
+                    <h2>FocusFlow</h2>
+                    <p>Plan - Focus - Achieve</p>
+                </div>
+            </div>
+            <!--Navigation Menu-->
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-link active">
+                    <i class="fa-solid fa-house" style="color: rgb(113, 178, 163);"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="tasks.html" class="nav-link ">
+                    <i class="fa-solid fa-square-check" style="color: rgb(113, 178, 163);"></i>
+                    <span>Task</span>
+                </a>
+
+                <a href="focus.html" class="nav-link ">
+                    <i class="fa-solid fa-clock" style="color: rgb(113, 178, 163);"></i>
+                    <span>Focus Room</span>
+                </a>
+
+                <a href="habits.html" class="nav-link ">
+                    <i class="fa-solid fa-seedling" style="color: rgb(113, 178, 163);"></i>
+                    <span>Habits</span>
+                </a>
+
+                <a href="analytics.html" class="nav-link ">
+                    <i class="fa-solid fa-chart-column" style="color: rgb(113, 178, 163);"></i>
+                    <span>Analytics</span>
+                </a>
+
+                <a href="settings.html" class="nav-link ">
+                    <i class="fa-solid fa-gear" style="color: rgb(113, 178, 163);"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-quote">
+                    <i class="fa-solid fa-heart" style="color: rgb(113, 178, 163);"></i>
+                    <h3>Better Focus</h3>
+                    <p>Bigger Dreams</p>
+                </div>
+            </div>
+        </aside>
+
+        <!--======================= MAIN CONTENT ==================================-->
+        <main class="main-content">
+            <!--======================== TOP HEADER =============================-->
+            <header class="top-header">
+                <!--left header-->
+                <div class="header-left"> 
+
+                    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation">
+                        <i class="fa-solid fa-bars" style="color:  rgb(113, 178, 163);"></i>
+                    </button>
+
+                    <div class="page-heading">
+                        <h1>Dashboard</h1>
+                        <p>Your personal productivity space</p>
+                    </div>
+                </div>
+                
+                <!--right header-->
+                <div class="header-right">
+                    <div class="current-date">
+                        <i class="fa-solid fa-calendar" style="color: rgb(113, 178, 163);"></i>
+                        <span id="current-date">
+                            Today's Date 
+                        </span>
+                    </div>
+
+                    <button class="profile-button" aria-label="User-profile">
+                        <i class="fa-solid fa-user" style="color: rgb(113, 178, 163);"></i>             
+                    </button>
+                </div>
+            </header>
+
+            <!--===================================== WELCOME SECTION ===================================-->
+            <section class="welcome-section">
+                <div  class="welcome-icon">
+                    <i class="fa-solid fa-sun" style="color: rgb(113, 178, 163);"></i>
+                </div>
+
+                <div class="welcome-content">
+                    <h2>Good Morning, User!</h2>
+                    <p> Small steps every day lead to big results. </p>
+                </div>
+            </section>
+            <!--===================================== SUMMARY CARDS ===================================-->
+            <section class="stats-section">
+                <!-- Total tasks-->
+                <div class="stat-card total-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-clipboard-list" style="color: rgb(113, 178, 163);"></i>
+                    </div>
+                    <div class="stat-info">
+                        <p>Total Tasks</p>
+                        <h2 id="total-tasks">0</h2>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color: rgb(113, 178, 163);"></i>
+                 </div>
+
+                <!--completed tasks-->
+                <div class="stat-card completed-card">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-check" style="color: rgb(113, 178, 163);"></i>
+                    </div>
+
+                    <div class="stat-info">
+                        <p>Completed Tasks</p>
+                        <h2 id="Completed-tasks">0</h2>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color: rgb(113, 178, 163);"></i>
+                </div>
+
+                <!--pending tasks-->
+                <div class="stat-card pending-card">
+                    
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-clock" style="color: rgb(113, 178, 163);"></i>
+                    </div>
+
+                    <div class="stat-info">
+                        <p>Pending Tasks</p>
+                        <h2 id="pending-tasks">0</h2>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color: rgb(113, 178, 163);"></i>
+                </div>
+
+                <!--Completion rate-->
+                <div class="stat-card rate-card">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-chart-line" style="color: rgb(113, 178, 163);"></i>
+                    </div>
+
+                    <div class="stat-info">
+                        <p>Completion-rate</p>
+                        <h2 id="completion-rate">0%</h2>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color: rgb(113, 178, 163);"></i>
+                </div>
+            </section>
+
+            <!--====================================== DASHBOARD CONTENT GRID =======================================-->
+            <div class="dashboard-grid">
+                <!--==========Today's Tasks ==========-->
+                <section class="tasks-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fa-solid fa-square-check" style="color: rgb(113, 178, 163);;"></i>
+                            <h2>Today's Tasks</h2>
+                        </div>
+
+                        <a href="tasks.html" class="view-all-link">View All
+                            <i class="fa-solid fa-arrow-right" style="color: rgb(113, 178, 163);"></i>
+                        </a>
+                    </div>
+
+                    <!--Task List-->
+                    <div id="dashboard-task-list" class="task-list">
+                        <!--Tasks will be loaded using javascript -->
+                        <div class="empty-task-mssage">
+                          <i class="fa-solid fa-list-check" style="color: rgb(113, 178, 163);"></i>
+                          <p>Your tasks will appear here. </p> 
+                          <a href="tasks.html" >
+                            Go To Task Manager
+                          </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!--====================================== PROGRESS SECTION====================================-->
+                <section class="progress-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                           <i class="fa-solid fa-bullseye" style="color: rgb(113, 178, 163);"></i> 
+                           <h2>Your Progress</h2>
+                        </div>
+                    </div>
+
+                    <div class="progress-content">
+
+                        <!--Circular Progress-->
+                        <div class="Progress-circle"  id="progress-circle" role="progressbar"
+                        aria-label="Task completion progress" aria-valuemin="0" aria-valuemax="100"
+                        aria-valuenow="0">
+                        <div class="progress-circle-inner">
+                            <h2 id="progress-percentage">0%</h2>
+                        </div>
+                        </div>
+                        <!-- Progress Details -->
+                        <div class="progress-details">
+
+                            <div class="progress-item">
+
+                                <span class="progress-label">
+
+                                    <span class="progress-dot completed-dot"></span>
+
+                                    Completed
+
+                                </span>
+
+                                <strong id="progress-completed">0</strong>
+
+                            </div>
+
+
+                            <div class="progress-item">
+
+                                <span class="progress-label">
+
+                                    <span class="progress-dot pending-dot"></span>
+
+                                    Pending
+
+                                </span>
+
+                                <strong id="progress-pending">0</strong>
+
+                            </div>
+
+
+                            <div class="progress-item">
+
+                                <span class="progress-label">
+                                    Total
+                                </span>
+
+                                <strong id="progress-total">0</strong>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

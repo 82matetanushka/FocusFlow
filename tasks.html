@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FocusFlow | Task Manager</title>
+
+    <link rel="stylesheet" href="CSS/styles.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo-container">
+            <i class="fa-solid fa-leaf" style="color: rgb(113, 178, 163);"></i>
+            <h2>FocusFlow</h2>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="index.html" class="nav-link">
+                <i class="fa-solid fa-house" style="color: rgb(113, 178, 163);"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="tasks.html" class="nav-link active">
+                <i class="fa-solid fa-list-check" style="color: rgb(113, 178, 163);"></i>
+                <span>Tasks</span>
+            </a>
+
+            <a href="Focus.html" class="nav-link">
+                <i class="fa-solid fa-bullseye" style="color: rgb(113, 178, 163);"></i>
+                <span>Focus Room</span>
+            </a>
+
+            <a href="habits.html" class="nav-link">
+                <i class="fa-solid fa-seedling" style="color: rgb(113, 178, 163);"></i>
+                <span>Habits</span>
+            </a>
+
+            <a href="analytics.html" class="nav-link">
+                <i class="fa-solid fa-chart-line" style="color: rgb(113, 178, 163);"></i>
+                <span>Analytics</span>
+            </a>
+
+            <a href="settings.html" class="nav-link">
+                <i class="fa-solid fa-gear" style="color: rgb(113, 178, 163);"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Small steps, big progress!</p>
+        </div>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="dashboard-header">
+
+            <button id="menu-toggle" class="menu-toggle"
+                    aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars" style="color: rgb(113, 178, 163);"></i>
+            </button>
+
+            <div>
+                <h1>My Tasks 📝</h1>
+                <p>Plan your work and make progress every day.</p>
+            </div>
+
+            <div class="header-date" id="tasks-date"></div>
+
+        </header>
+
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+
+            <div>
+                <h2>Stay organized!</h2>
+                <p>Every completed task is a step towards your goals.</p>
+            </div>
+
+            <div class="focus-welcome-icon">
+                <i class="fa-solid fa-clipboard-check" style="color: rgb(113, 178, 163);"></i>
+            </div>
+
+        </section>
+
+        <!-- Task Statistics -->
+        <section class="stats-grid task-stats">
+
+            <div class="stat-card">
+                <div class="stat-icon total-icon">
+                    <i class="fa-solid fa-list-check" style="color: rgb(113, 178, 163);"></i>
+                </div>
+
+                <div>
+                    <p>Total Tasks</p>
+                    <h2 id="tasks-total">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon completed-icon">
+                    <i class="fa-solid fa-circle-check" style="color: rgb(113, 178, 163);"></i>
+                </div>
+
+                <div>
+                    <p>Completed</p>
+                    <h2 id="tasks-completed">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon pending-icon">
+                    <i class="fa-solid fa-clock" style="color: rgb(113, 178, 163);"></i>
+                </div>
+
+                <div>
+                    <p>Pending</p>
+                    <h2 id="tasks-pending">0</h2>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Add Task Form -->
+        <section class="task-form-card">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Add a New Task</h2>
+                    <p>Write down what you want to accomplish.</p>
+                </div>
+
+                <i class="fa-solid fa-pen-to-square" style="color: rgb(113, 178, 163);"></i>
+            </div>
+
+            <form id="task-form">
+
+                <div class="task-form-grid">
+
+                    <div class="form-group task-name-group">
+                        <label for="task-name">Task Name *</label>
+
+                        <input
+                            type="text"
+                            id="task-name"
+                            name="name"
+                            placeholder="e.g. Complete Java assignment"
+                            required
+                            maxlength="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-priority">Priority</label>
+
+                        <select id="task-priority" name="priority" required>
+                            <option value="Low">Low</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-due-date">Due Date</label>
+
+                        <input
+                            type="date"
+                            id="task-due-date"
+                            name="dueDate">
+                    </div>
+
+                    <div class="form-group task-description-group">
+                        <label for="task-description">Description</label>
+
+                        <textarea
+                            id="task-description"
+                            name="description"
+                            rows="3"
+                            placeholder="Add some details about your task..."
+                            maxlength="500"></textarea>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="add-task-button" id="add-task-button">
+                    <i class="fa-solid fa-plus" style="color: rgb(113, 178, 163);"></i>
+                    Add Task
+                </button>
+
+                <p id="task-form-message" class="task-form-message"
+                   role="status" aria-live="polite"></p>
+
+            </form>
+
+        </section>
+
+        <!-- Task List -->
+        <section class="task-list-card">
+
+            <div class="section-heading task-list-heading">
+
+                <div>
+                    <h2>My Task List</h2>
+                    <p>Manage your tasks in one place.</p>
+                </div>
+
+                <i class="fa-solid fa-clipboard-list" style="color: rgb(113, 178, 163);"></i>
+
+            </div>
+
+            <!-- Search -->
+            <div class="task-toolbar">
+
+                <div class="task-search-box">
+                    <i class="fa-solid fa-magnifying-glass" style="color: rgb(113, 178, 163);"></i>
+
+                    <input
+                        type="search"
+                        id="task-search"
+                        placeholder="Search tasks..."
+                        aria-label="Search tasks">
+                </div>
+
+                <select id="task-status-filter" aria-label="Filter tasks by status">
+                    <option value="all">All Tasks</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                </select>
+
+                <select id="task-priority-filter" aria-label="Filter tasks by priority">
+                    <option value="all">All Priorities</option>
+                    <option value="High">High Priority</option>
+                    <option value="Medium">Medium Priority</option>
+                    <option value="Low">Low Priority</option>
+                </select>
+
+            </div>
+
+            <!-- Tasks are loaded here by JavaScript -->
+            <div id="task-list" class="task-list">
+
+                <div class="task-loading">
+                    <i class="fa-solid fa-spinner" style="color: rgb(113, 178, 163);"></i>
+                    <p>Loading your tasks...</p>
+                </div>
+
+            </div>
+
+            <div class="task-list-footer">
+                <span id="task-result-count">Loading tasks...</span>
+
+                <button type="button" id="refresh-tasks" class="refresh-tasks-button">
+                    <i class="fa-solid fa-rotate" style="color: rgb(113, 178, 163);"></i>
+                    Refresh
+                </button>
+            </div>
+
+        </section>
+
+        <footer class="dashboard-footer">
+            <p>© <span id="footer-year"></span> FocusFlow. Make every moment count.</p>
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
