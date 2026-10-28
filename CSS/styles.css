@@ -4622,3 +4622,1382 @@ small {
         width: 100%;
     }
 }
+
+
+
+/* ============================================================
+   FOCUSFLOW - DARK MODE
+============================================================ */
+
+body.dark-mode {
+    background-color: #121a18;
+    color: #e5eeeb;
+}
+
+/* Main content */
+
+body.dark-mode .main-content {
+    background-color: #121a18;
+    color: #e5eeeb;
+}
+
+/* Sidebar */
+
+body.dark-mode .sidebar {
+    background-color: #192522;
+    color: #e5eeeb;
+    border-color: #30443d;
+}
+
+body.dark-mode .logo-text h2,
+body.dark-mode .logo-text p,
+body.dark-mode .nav-link,
+body.dark-mode .sidebar-quote h3,
+body.dark-mode .sidebar-quote p {
+    color: #e5eeeb;
+}
+
+/* Header */
+
+body.dark-mode .top-header {
+    background-color: #192522;
+    color: #e5eeeb;
+    border-color: #30443d;
+}
+
+body.dark-mode .page-heading h1,
+body.dark-mode .page-heading p,
+body.dark-mode .settings-intro h2,
+body.dark-mode .settings-intro p {
+    color: #e5eeeb;
+}
+
+/* Settings cards */
+
+body.dark-mode .settings-card {
+    background-color: #1e2b27;
+    color: #e5eeeb;
+    border-color: #30443d;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .settings-card h2,
+body.dark-mode .settings-card h3,
+body.dark-mode .settings-card p,
+body.dark-mode .settings-card label,
+body.dark-mode .settings-card small {
+    color: #e5eeeb;
+}
+
+/* Input fields */
+
+body.dark-mode .settings-card input[type="text"],
+body.dark-mode .settings-card input[type="number"],
+body.dark-mode .settings-card input[type="email"] {
+    background-color: #121a18;
+    color: #e5eeeb;
+    border: 1px solid #496258;
+}
+
+body.dark-mode .settings-card input::placeholder {
+    color: #a5b8b0;
+}
+
+/* Options and footer */
+
+body.dark-mode .settings-option {
+    border-color: #30443d;
+}
+
+body.dark-mode .settings-footer {
+    background-color: #121a18;
+    color: #b7c9c1;
+}
+
+body.dark-mode .current-date {
+    color: #e5eeeb;
+}
+
+/* Buttons */
+
+body.dark-mode .settings-button-secondary {
+    background-color: #30443d;
+    color: #ffffff;
+    border-color: #496258;
+}
+
+/* Navigation */
+
+body.dark-mode .nav-link:hover,
+body.dark-mode .nav-link.active {
+    background-color: #30443d;
+    color: #ffffff;
+}
+
+/* Profile button */
+
+body.dark-mode .profile-button,
+body.dark-mode .menu-toggle {
+    background-color: #1e2b27;
+    color: #e5eeeb;
+}
+
+/* Smooth transition */
+
+body,
+body .main-content,
+body .sidebar,
+body .top-header,
+body .settings-card {
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+
+
+/* FocusFlow Dark Mode */
+
+body.dark-mode {
+    background-color: #121a18;
+    color: #e5eeeb;
+}
+
+body.dark-mode .main-content,
+body.dark-mode .settings-page {
+    background-color: #121a18;
+    color: #e5eeeb;
+}
+
+body.dark-mode .sidebar,
+body.dark-mode .top-header,
+body.dark-mode .settings-card {
+    background-color: #1e2b27;
+    color: #e5eeeb;
+    border-color: #30443d;
+}
+
+body.dark-mode .settings-card h2,
+body.dark-mode .settings-card h3,
+body.dark-mode .settings-card p,
+body.dark-mode .settings-card label,
+body.dark-mode .settings-intro h2,
+body.dark-mode .settings-intro p,
+body.dark-mode .page-heading h1,
+body.dark-mode .page-heading p {
+    color: #e5eeeb;
+}
+
+body.dark-mode .settings-card input {
+    background-color: #121a18;
+    color: #e5eeeb;
+    border-color: #496258;
+}
+
+/* =====================================================
+   FOCUSFLOW - COMPLETE DARK AND LIGHT THEME
+   Keeps the original sage-green design
+===================================================== */
+
+/* LIGHT THEME - DEFAULT */
+:root {
+    color-scheme: light;
+
+    --theme-bg: #fcfaf5;
+    --theme-card: #ffffff;
+    --theme-sidebar: #eaf2e8;
+    --theme-text: #173d3d;
+    --theme-muted: #526e78;
+    --theme-border: #e6e8e4;
+    --theme-input: #ffffff;
+    --theme-hover: #eaf4e9;
+    --theme-shadow: 0 4px 14px rgba(30, 60, 50, 0.06);
+}
+
+/* DARK THEME */
+body.dark-mode {
+    color-scheme: dark;
+
+    --theme-bg: #121a18;
+    --theme-card: #1e2b27;
+    --theme-sidebar: #192522;
+    --theme-text: #e5eeeb;
+    --theme-muted: #b0c2ba;
+    --theme-border: #354740;
+    --theme-input: #16211d;
+    --theme-hover: #2a3d34;
+    --theme-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+
+    background: var(--theme-bg);
+    color: var(--theme-text);
+}
+
+/* Main page backgrounds */
+body.dark-mode,
+body.dark-mode .main-content,
+body.dark-mode .habits-page,
+body.dark-mode .analytics-page,
+body.dark-mode .settings-page {
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
+}
+
+/* Sidebar */
+body.dark-mode .sidebar {
+    background: linear-gradient(
+        180deg,
+        #192522 0%,
+        #1d2c26 65%,
+        #192522 100%
+    );
+
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+/* Sidebar logo and navigation */
+body.dark-mode .logo-text h2,
+body.dark-mode .logo-text p,
+body.dark-mode .nav-link,
+body.dark-mode .sidebar-quote h3,
+body.dark-mode .sidebar-quote p,
+body.dark-mode .sidebar-bottom p {
+    color: var(--theme-text);
+}
+
+body.dark-mode .sidebar-quote,
+body.dark-mode .sidebar-bottom {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+}
+
+body.dark-mode .nav-link:hover {
+    background: var(--theme-hover);
+    color: #a7d8bd;
+}
+
+body.dark-mode .nav-link.active {
+    background: linear-gradient(135deg, #6c9f87, #426f5b);
+    color: #ffffff;
+}
+
+/* Header */
+body.dark-mode .top-header,
+body.dark-mode .dashboard-header {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+}
+
+body.dark-mode .page-heading h1,
+body.dark-mode .dashboard-header h1,
+body.dark-mode .page-heading p,
+body.dark-mode .dashboard-header p,
+body.dark-mode .current-date {
+    color: var(--theme-text);
+}
+
+/* Common cards across pages */
+body.dark-mode .tasks-section,
+body.dark-mode .progress-section,
+body.dark-mode .quick-access-section,
+body.dark-mode .task-form-card,
+body.dark-mode .task-list-card,
+body.dark-mode .focus-timer-card,
+body.dark-mode .focus-info-card,
+body.dark-mode .focus-instructions,
+body.dark-mode .settings-card,
+body.dark-mode .habits-card,
+body.dark-mode .habits-summary-card,
+body.dark-mode .analytics-card,
+body.dark-mode .analytics-summary-card,
+body.dark-mode .analytics-insight-card {
+    background-color: var(--theme-card);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+    box-shadow: var(--theme-shadow);
+}
+
+/* Card headings and text */
+body.dark-mode .section-title h2,
+body.dark-mode .section-title > i,
+body.dark-mode .section-heading h2,
+body.dark-mode .section-heading p,
+body.dark-mode .form-group label,
+body.dark-mode .task-row-content h3,
+body.dark-mode .task-row-content p,
+body.dark-mode .task-due-date,
+body.dark-mode .habits-card h2,
+body.dark-mode .habits-card h3,
+body.dark-mode .settings-card h2,
+body.dark-mode .settings-card h3,
+body.dark-mode .settings-card p,
+body.dark-mode .settings-card label,
+body.dark-mode .settings-option-text h3,
+body.dark-mode .settings-option-text p,
+body.dark-mode .analytics-page h2,
+body.dark-mode .analytics-page h3,
+body.dark-mode .analytics-page p {
+    color: var(--theme-text);
+}
+
+/* Secondary text */
+body.dark-mode .text-muted,
+body.dark-mode .session-note,
+body.dark-mode .timer-message,
+body.dark-mode .focus-subtitle,
+body.dark-mode .focus-tips li,
+body.dark-mode .habits-page small,
+body.dark-mode .settings-footer,
+body.dark-mode .main-footer {
+    color: var(--theme-muted);
+}
+
+/* Form fields */
+body.dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+body.dark-mode select,
+body.dark-mode textarea,
+body.dark-mode .task-search-box,
+body.dark-mode .task-toolbar select {
+    background-color: var(--theme-input);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+/* Placeholder text */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #9aafa5;
+}
+
+/* Focus Room */
+body.dark-mode .focus-quote-card {
+    background: #302b40;
+    border-color: #49405e;
+}
+
+body.dark-mode .focus-quote-card p,
+body.dark-mode .focus-quote-card span {
+    color: #e4d9f5;
+}
+
+body.dark-mode .instruction-item {
+    background: var(--theme-hover);
+}
+
+/* Task cards */
+body.dark-mode .task-row {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+}
+
+body.dark-mode .task-row:hover {
+    border-color: var(--primary);
+}
+
+/* Progress circle */
+body.dark-mode .progress-circle {
+    background: conic-gradient(
+        var(--primary) var(--progress),
+        #354740 var(--progress)
+    );
+}
+
+body.dark-mode .progress-circle-inner {
+    background: var(--theme-card);
+    color: var(--theme-text);
+}
+
+/* Pastel cards - retain their colors, but darken the backgrounds */
+body.dark-mode .total-card,
+body.dark-mode .pending-card,
+body.dark-mode .add-task-card,
+body.dark-mode .habits-card {
+    background: #24382e;
+    border-color: #354e40;
+    color: #c5e8d0;
+}
+
+body.dark-mode .completed-card,
+body.dark-mode .rate-card,
+body.dark-mode .go-tasks-card {
+    background: #302b40;
+    border-color: #49405e;
+    color: #e0d6fa;
+}
+
+body.dark-mode .focus-card {
+    background: #3b2d25;
+    border-color: #574032;
+    color: #ffd0ad;
+}
+
+body.dark-mode .analytics-card {
+    background: #233541;
+    border-color: #354d5d;
+    color: #c5e4fa;
+}
+
+/* Motivational card */
+body.dark-mode .motivation-card {
+    background: linear-gradient(135deg, #302b40, #292638);
+    border-color: #49405e;
+}
+
+body.dark-mode .motivation-card h3,
+body.dark-mode .motivation-card p {
+    color: #e4d9f5;
+}
+
+/* Buttons */
+body.dark-mode .menu-toggle,
+body.dark-mode .profile-button {
+    background-color: #2a3d34;
+    color: #e5eeeb;
+    border-color: var(--theme-border);
+}
+
+body.dark-mode .settings-button-secondary,
+body.dark-mode #reset-settings,
+body.dark-mode .task-action-button,
+body.dark-mode .refresh-tasks-button {
+    background-color: var(--theme-hover);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+/* Borders and dividers */
+body.dark-mode .section-header,
+body.dark-mode .progress-item,
+body.dark-mode .task-row,
+body.dark-mode .session-stat,
+body.dark-mode .focus-tips li,
+body.dark-mode .settings-option {
+    border-color: var(--theme-border);
+}
+
+/* Links */
+body.dark-mode .view-all-link,
+body.dark-mode .empty-task-message a {
+    color: #a7d8bd;
+}
+
+/* Footer */
+body.dark-mode .main-footer,
+body.dark-mode .settings-footer {
+    background-color: transparent;
+    color: var(--theme-muted);
+}
+
+/* Smooth transition */
+body,
+body .sidebar,
+body .main-content,
+body .top-header,
+body .tasks-section,
+body .progress-section,
+body .task-form-card,
+body .task-list-card,
+body .focus-timer-card,
+body .settings-card,
+body .habits-card {
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    body,
+    body * {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+
+/* ==========================================
+   FOCUSFLOW - TEXT VISIBILITY FIX
+   Add this at the END of styles.css
+========================================== */
+
+/* Default text colors for all pages */
+body {
+    color: #263b33;
+}
+
+/* Main headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #244638;
+}
+
+/* Paragraphs and common text */
+p,
+label,
+li,
+span {
+    color: inherit;
+}
+
+/* Dashboard headings and descriptions */
+.page-heading h1,
+.dashboard-header h1,
+.section-title h2,
+.welcome-content h2 {
+    color: #244638;
+}
+
+.page-heading p,
+.dashboard-header p,
+.welcome-content p {
+    color: #52665c;
+}
+
+/* Cards and sections */
+.stat-card,
+.task-card,
+.habit-card,
+.analytics-card,
+.progress-card,
+.quick-access-card,
+.settings-card,
+.content-card {
+    color: #263b33;
+}
+
+/* Text inside cards */
+.stat-info p,
+.stat-info h2,
+.task-name,
+.task-title,
+.habit-name,
+.card-title,
+.section-title {
+    color: #244638;
+}
+
+/* Dates, descriptions, and secondary text */
+.current-date,
+.header-date,
+.task-time,
+.description,
+.subtitle,
+.text-muted {
+    color: #52665c;
+}
+
+/* Form labels and input text */
+label {
+    color: #344c40;
+}
+
+input,
+select,
+textarea {
+    color: #263b33;
+    background-color: #ffffff;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #77877e;
+    opacity: 1;
+}
+
+/* Links */
+a {
+    color: #397557;
+}
+
+a:hover {
+    color: #244f3a;
+}
+
+/* Dark mode text visibility */
+body.dark-mode {
+    color: #e8eee9;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode .page-heading h1,
+body.dark-mode .dashboard-header h1,
+body.dark-mode .section-title h2,
+body.dark-mode .welcome-content h2 {
+    color: #e8eee9;
+}
+
+body.dark-mode p,
+body.dark-mode label,
+body.dark-mode li,
+body.dark-mode .page-heading p,
+body.dark-mode .dashboard-header p,
+body.dark-mode .welcome-content p,
+body.dark-mode .current-date,
+body.dark-mode .header-date,
+body.dark-mode .description,
+body.dark-mode .subtitle,
+body.dark-mode .text-muted {
+    color: #c5d2ca;
+}
+
+/* Dark mode cards */
+body.dark-mode .stat-card,
+body.dark-mode .task-card,
+body.dark-mode .habit-card,
+body.dark-mode .analytics-card,
+body.dark-mode .progress-card,
+body.dark-mode .quick-access-card,
+body.dark-mode .settings-card,
+body.dark-mode .content-card {
+    color: #e8eee9;
+}
+
+/* Dark mode inputs */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    color: #e8eee9;
+    background-color: #26352e;
+    border-color: #53675b;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #aab9af;
+}
+
+/* Dark mode links */
+body.dark-mode a {
+    color: #a4d9b8;
+}
+
+body.dark-mode a:hover {
+    color: #d0f0dc;
+}
+ 
+
+
+/* ==========================================
+   FIX: DASHBOARD TEXT VISIBILITY IN DARK MODE
+========================================== */
+
+/* Welcome card */
+body.dark-mode .welcome-content h2,
+body.dark-mode .welcome-content h3,
+body.dark-mode .welcome-content p,
+body.dark-mode .welcome-card h2,
+body.dark-mode .welcome-card h3,
+body.dark-mode .welcome-card p {
+    color: #263b33 !important;
+}
+
+/* Today's task names and descriptions */
+body.dark-mode .task-row,
+body.dark-mode .task-row span,
+body.dark-mode .task-row p,
+body.dark-mode .task-row .task-name,
+body.dark-mode .task-name,
+body.dark-mode .task-title {
+    color: #e8eee9 !important;
+}
+
+/* Task priority labels */
+body.dark-mode .task-priority {
+    color: #244638 !important;
+}
+
+/* Progress section */
+body.dark-mode .progress-label,
+body.dark-mode .progress-details,
+body.dark-mode .progress-details p,
+body.dark-mode .progress-details span,
+body.dark-mode .progress-content p,
+body.dark-mode .progress-content span {
+    color: #e8eee9 !important;
+}
+
+/* Statistics cards */
+body.dark-mode .stat-info p,
+body.dark-mode .stat-info h2,
+body.dark-mode .stat-info span {
+    color: #f0f5f1 !important;
+}
+
+/* Dashboard section headings */
+body.dark-mode .section-title h2,
+body.dark-mode .section-title h3 {
+    color: #f0f5f1 !important;
+}
+
+/* Dashboard links */
+body.dark-mode .view-all-link {
+    color: #a4d9b8 !important;
+}
+
+/* Keep text readable inside task cards */
+body.dark-mode .task-card,
+body.dark-mode .task-item,
+body.dark-mode .task-row {
+    background-color: #1d2c26;
+}
+
+/* Progress chart labels and numbers */
+body.dark-mode .progress-circle-inner h2,
+body.dark-mode .progress-circle-inner p {
+    color: #f0f5f1 !important;
+}
+
+/* ==================================================
+   FOCUSFLOW - TASK LIST DESIGN
+   Applies only to the Task Manager task list
+================================================== */
+
+/* Main task list card */
+.task-list-card {
+    width: 100%;
+    min-width: 0;
+    margin-top: 28px;
+    padding: 28px;
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--border-color, #e8e8df);
+    border-radius: 20px;
+    box-shadow: 0 8px 28px rgba(46, 65, 53, 0.06);
+    box-sizing: border-box;
+}
+
+/* Task list heading */
+.task-list-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.task-list-heading h2 {
+    margin: 0 0 7px;
+    color: var(--text-primary, #303d34);
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+}
+
+.task-list-heading p {
+    margin: 0;
+    color: var(--text-secondary, #7c857d);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.task-list-heading > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: #eaf3ed;
+    color: #71b2a3;
+    font-size: 23px;
+}
+
+/* Search and filter toolbar */
+.task-list-card .task-toolbar {
+    display: grid;
+    grid-template-columns: minmax(180px, 1.5fr) minmax(135px, 1fr) minmax(145px, 1fr);
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+/* Search input container */
+.task-list-card .task-search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 0 14px;
+    background: #fafbf8;
+    border: 1px solid #e4e9e2;
+    border-radius: 11px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-list-card .task-search-box:focus-within {
+    border-color: #71b2a3;
+    box-shadow: 0 0 0 3px rgba(113, 178, 163, 0.14);
+}
+
+.task-list-card .task-search-box > i {
+    flex-shrink: 0;
+    font-size: 15px;
+}
+
+.task-list-card .task-search-box input {
+    width: 100%;
+    min-width: 0;
+    height: 44px;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #354138;
+    font-size: 13px;
+    box-shadow: none;
+}
+
+.task-list-card .task-search-box input::placeholder {
+    color: #9aa39a;
+}
+
+/* Filter dropdowns */
+.task-list-card .task-toolbar select {
+    width: 100%;
+    min-width: 0;
+    height: 46px;
+    padding: 0 34px 0 13px;
+    border: 1px solid #e4e9e2;
+    border-radius: 11px;
+    background-color: #fafbf8;
+    color: #49574c;
+    font-size: 13px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-list-card .task-toolbar select:focus {
+    border-color: #71b2a3;
+    box-shadow: 0 0 0 3px rgba(113, 178, 163, 0.14);
+}
+
+/* Task list layout */
+.task-list-card .task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+    padding: 0;
+}
+
+/* Individual task card */
+.task-list-card .task-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid #e8ebe5;
+    border-left: 4px solid #a9cdb8;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 3px 12px rgba(46, 65, 53, 0.035);
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease,
+                transform 0.2s ease;
+}
+
+.task-list-card .task-row:hover {
+    border-color: #c8ded0;
+    box-shadow: 0 7px 20px rgba(46, 65, 53, 0.07);
+    transform: translateY(-2px);
+}
+
+/* Completed task card */
+.task-list-card .task-row.completed {
+    border-left-color: #71b2a3;
+    background: #f8fbf8;
+}
+
+/* Task information */
+.task-list-card .task-row-content {
+    flex: 1 1 240px;
+    min-width: 0;
+}
+
+.task-list-card .task-row-content h3 {
+    margin: 0 0 8px;
+    color: #354238;
+    font-size: 16px;
+    font-weight: 650;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.task-list-card .task-row.completed .task-row-content h3 {
+    color: #78867b;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+}
+
+.task-list-card .task-row-content p {
+    margin: 0 0 13px;
+    color: #7d887e;
+    font-size: 13px;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+/* Priority, status and due date */
+.task-list-card .task-row-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.task-list-card .task-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    width: fit-content;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* Priority colours */
+.task-list-card .priority-high {
+    background: #fff0ed;
+    color: #bf5145;
+}
+
+.task-list-card .priority-medium {
+    background: #fff4df;
+    color: #a87520;
+}
+
+.task-list-card .priority-low {
+    background: #e9f4e9;
+    color: #4f8658;
+}
+
+/* Pending and completed status */
+.task-list-card .task-status-badge {
+    background: #f0f1ed;
+    color: #657067;
+}
+
+.task-list-card .task-row.completed .task-status-badge {
+    background: #e1f2e7;
+    color: #35764d;
+}
+
+/* Due date */
+.task-list-card .task-due-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #7b857d;
+    font-size: 12px;
+}
+
+/* Action buttons container */
+.task-list-card .task-row-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* Common action button */
+.task-list-card .task-action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 36px;
+    padding: 9px 12px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease,
+                border-color 0.2s ease, transform 0.2s ease;
+}
+
+.task-list-card .task-action-button i {
+    font-size: 12px;
+}
+
+/* Complete button */
+.task-list-card .complete-task-button {
+    background: #e6f4eb;
+    border-color: #cce7d5;
+    color: #31784b;
+}
+
+.task-list-card .complete-task-button:hover {
+    background: #31784b;
+    border-color: #31784b;
+    color: #ffffff;
+}
+
+/* Edit button */
+.task-list-card .edit-task-button {
+    background: #edf0ff;
+    border-color: #dce1ff;
+    color: #5265ad;
+}
+
+.task-list-card .edit-task-button:hover {
+    background: #5265ad;
+    border-color: #5265ad;
+    color: #ffffff;
+}
+
+/* Delete button */
+.task-list-card .delete-task-button {
+    background: #fff0ed;
+    border-color: #f5d8d2;
+    color: #bc4d42;
+}
+
+.task-list-card .delete-task-button:hover {
+    background: #bc4d42;
+    border-color: #bc4d42;
+    color: #ffffff;
+}
+
+/* Button interaction */
+.task-list-card .task-action-button:active {
+    transform: scale(0.97);
+}
+
+.task-list-card .task-action-button:focus-visible {
+    outline: 3px solid rgba(113, 178, 163, 0.35);
+    outline-offset: 2px;
+}
+
+.task-list-card .task-action-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Loading, error and empty task messages */
+.task-list-card .task-loading,
+.task-list-card .task-error,
+.task-list-card .task-empty {
+    padding: 35px 20px;
+    border: 1px dashed #dce6dc;
+    border-radius: 14px;
+    background: #fafcf9;
+    text-align: center;
+}
+
+.task-list-card .task-loading i,
+.task-list-card .task-error i,
+.task-list-card .task-empty i {
+    margin-bottom: 12px;
+    font-size: 27px;
+    color: #71b2a3;
+}
+
+.task-list-card .task-loading p,
+.task-list-card .task-error p,
+.task-list-card .task-empty p {
+    margin: 6px 0;
+    color: #78847a;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.task-list-card .task-error i {
+    color: #bc4d42;
+}
+
+/* Task list footer */
+.task-list-card .task-list-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #eaede7;
+    color: #7c877d;
+    font-size: 12px;
+}
+
+/* Refresh button */
+.task-list-card .refresh-tasks-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 9px 14px;
+    border: 1px solid #dce7dd;
+    border-radius: 10px;
+    background: #f4f8f3;
+    color: #4e765a;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.task-list-card .refresh-tasks-button:hover {
+    background: #dfeee3;
+    color: #315f40;
+}
+
+/* Tablet layout */
+@media (max-width: 1000px) {
+    .task-list-card {
+        padding: 22px;
+    }
+
+    .task-list-card .task-toolbar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .task-list-card .task-search-box {
+        grid-column: 1 / -1;
+        min-height: 44px;
+    }
+
+    .task-list-card .task-row {
+        align-items: flex-start;
+    }
+
+    .task-list-card .task-row-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+    .task-list-card {
+        margin-top: 20px;
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .task-list-heading {
+        gap: 12px;
+        margin-bottom: 19px;
+    }
+
+    .task-list-heading h2 {
+        font-size: 19px;
+    }
+
+    .task-list-heading p {
+        font-size: 12px;
+    }
+
+    .task-list-heading > i {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        font-size: 19px;
+    }
+
+    .task-list-card .task-toolbar {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+        margin-bottom: 17px;
+    }
+
+    .task-list-card .task-search-box {
+        grid-column: auto;
+    }
+
+    .task-list-card .task-toolbar select {
+        height: 43px;
+    }
+
+    .task-list-card .task-list {
+        gap: 11px;
+    }
+
+    .task-list-card .task-row {
+        gap: 14px;
+        padding: 15px;
+        border-radius: 13px;
+    }
+
+    .task-list-card .task-row-content {
+        flex-basis: 100%;
+    }
+
+    .task-list-card .task-row-content h3 {
+        font-size: 15px;
+    }
+
+    .task-list-card .task-row-content p {
+        font-size: 12px;
+    }
+
+    .task-list-card .task-row-actions {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: 100%;
+        gap: 7px;
+    }
+
+    .task-list-card .task-action-button {
+        width: 100%;
+        min-width: 0;
+        padding: 9px 5px;
+        gap: 5px;
+        font-size: 11px;
+    }
+
+    .task-list-card .task-list-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* Very small mobile screens */
+@media (max-width: 360px) {
+    .task-list-card .task-row-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .task-list-card .task-action-button {
+        justify-content: center;
+        padding: 10px;
+    }
+}
+
+/* ==========================================
+   FIX TASK LIST ACTION BUTTON OVERLAPPING
+========================================== */
+
+/* Keep action buttons in a properly spaced row */
+.task-list-card .task-row-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 10px;
+    width: auto;
+    flex: 0 0 auto;
+    min-width: max-content;
+}
+
+/* Give every task action button enough space */
+.task-list-card .task-row-actions .task-action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    width: auto !important;
+    min-width: 90px;
+    max-width: none;
+    min-height: 44px;
+    height: auto;
+
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    padding: 10px 13px;
+
+    font-size: 13px;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+/* Keep icons and text aligned */
+.task-list-card .task-row-actions .task-action-button i {
+    display: inline-block;
+    flex-shrink: 0;
+    font-size: 13px;
+}
+
+/* Improve task card alignment */
+.task-list-card .task-row {
+    align-items: center;
+    gap: 20px;
+}
+
+.task-list-card .task-row-content {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+    .task-list-card .task-row {
+        flex-wrap: wrap;
+    }
+
+    .task-list-card .task-row-actions {
+        width: 100%;
+        min-width: 0;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .task-list-card .task-row-actions {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: 100%;
+        gap: 8px;
+    }
+
+    .task-list-card .task-row-actions .task-action-button {
+        width: 100% !important;
+        min-width: 0;
+        padding: 10px 5px;
+        gap: 5px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 360px) {
+    .task-list-card .task-row-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dashboard completed task appearance */
+.tasks-section .task-row.completed .task-name {
+    color: #7b8b7f;
+    text-decoration: line-through;
+    opacity: 0.75;
+}
+
+.tasks-section .task-row.completed {
+    background-color: #f1f7f2;
+    border-color: #d9e8dc;
+}
+
+.dashboard-task-checkbox {
+    accent-color: #71b2a3;
+    cursor: pointer;
+}
+
+.dashboard-task-checkbox:disabled {
+    cursor: wait;
+    opacity: 0.6;
+}

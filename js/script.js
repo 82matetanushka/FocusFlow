@@ -1,7 +1,8 @@
-/* ==========================================
-   FOCUSFLOW - DASHBOARD JAVASCRIPT
-   Dashboard + Date + Mobile Navigation
-========================================== */
+/* ============================================================
+   FOCUSFLOW - MAIN JAVASCRIPT
+   Contains: Dashboard, Focus Room Timer, and Task Manager
+   Separate files: settings.js, analytics.js, and habits.js
+============================================================ */
 
 
 /* ==========================================
@@ -17,11 +18,9 @@ const dashboardAPI =
 ========================================== */
 
 function displayDashboardDate() {
-
     const dateElement = document.getElementById("current-date");
 
     if (dateElement) {
-
         const today = new Date();
 
         dateElement.textContent = today.toLocaleDateString("en-IN", {
@@ -29,9 +28,7 @@ function displayDashboardDate() {
             month: "short",
             year: "numeric"
         });
-
     }
-
 }
 
 
@@ -40,15 +37,11 @@ function displayDashboardDate() {
 ========================================== */
 
 function displayFooterYear() {
-
     const yearElement = document.getElementById("footer-year");
 
     if (yearElement) {
-
         yearElement.textContent = new Date().getFullYear();
-
     }
-
 }
 
 
@@ -57,7 +50,6 @@ function displayFooterYear() {
 ========================================== */
 
 function displayWelcomeGreeting() {
-
     const greetingElement = document.querySelector(
         ".welcome-content h2"
     );
@@ -65,25 +57,17 @@ function displayWelcomeGreeting() {
     if (!greetingElement) return;
 
     const hour = new Date().getHours();
-
     let greeting;
 
     if (hour < 12) {
-
         greeting = "Good Morning, User!";
-
     } else if (hour < 17) {
-
         greeting = "Good Afternoon, User!";
-
     } else {
-
         greeting = "Good Evening, User!";
-
     }
 
     greetingElement.textContent = greeting;
-
 }
 
 
@@ -92,7 +76,6 @@ function displayWelcomeGreeting() {
 ========================================== */
 
 async function loadDashboardTasks() {
-
     const taskList = document.getElementById(
         "dashboard-task-list"
     );
@@ -101,23 +84,18 @@ async function loadDashboardTasks() {
     if (!taskList) return;
 
     try {
-
         const response = await fetch(dashboardAPI);
 
         if (!response.ok) {
-
             throw new Error("Unable to retrieve tasks.");
-
         }
 
         const tasks = await response.json();
 
         updateDashboardStatistics(tasks);
-
         displayDashboardTaskList(tasks);
 
     } catch (error) {
-
         console.error("Dashboard error:", error);
 
         taskList.innerHTML = `
@@ -135,31 +113,112 @@ async function loadDashboardTasks() {
         );
 
         if (retryButton) {
-
             retryButton.addEventListener(
                 "click",
                 loadDashboardTasks
             );
-
         }
-
     }
-
 }
 
 
 /* ==========================================
-   6. UPDATE DASHBOARD STATISTICS
+   6. COMPLETE TASK FROM DASHBOARD
+========================================== */
+
+function setupDashboardTaskCompletion() {
+    const taskList = document.getElementById(
+        "dashboard-task-list"
+    );
+
+    if (!taskList) return;
+
+    taskList.addEventListener("change", async function (event) {
+        const checkbox = event.target.closest(
+            ".dashboard-task-checkbox"
+        );
+
+        if (!checkbox) return;
+
+        const taskId = checkbox.dataset.taskId;
+        const isChecked = checkbox.checked;
+
+        checkbox.disabled = true;
+
+        try {
+            // Get the latest task records from MockAPI.
+            const getResponse = await fetch(dashboardAPI);
+
+            if (!getResponse.ok) {
+                throw new Error("Unable to load task data.");
+            }
+
+            const tasks = await getResponse.json();
+
+            const task = tasks.find(function (item) {
+                return String(item.id) === String(taskId);
+            });
+
+            if (!task) {
+                throw new Error("Task was not found.");
+            }
+
+            // Save the updated task status.
+            const now = new Date();
+
+            const today =
+                `${now.getFullYear()}-` +
+                `${String(now.getMonth() + 1).padStart(2, "0")}-` +
+                `${String(now.getDate()).padStart(2, "0")}`;
+
+            const updatedTask = {
+                ...task,
+                status: isChecked ? "completed" : "pending",
+                completedAt: isChecked ? today : null
+            };
+
+            const updateResponse = await fetch(
+                `${dashboardAPI}/${encodeURIComponent(taskId)}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(updatedTask)
+                }
+            );
+
+            if (!updateResponse.ok) {
+                throw new Error("Unable to update task status.");
+            }
+
+            // Reload statistics and tasks.
+            await loadDashboardTasks();
+
+        } catch (error) {
+            console.error("Dashboard completion error:", error);
+
+            // Restore the checkbox if saving failed.
+            checkbox.checked = !isChecked;
+
+            alert("Could not update the task. Please try again.");
+
+        } finally {
+            checkbox.disabled = false;
+        }
+    });
+}
+
+
+/* ==========================================
+   7. UPDATE DASHBOARD STATISTICS
 ========================================== */
 
 function updateDashboardStatistics(tasks) {
-
     const total = tasks.length;
 
-    const completed = tasks.filter(task => {
-
+    const completed = tasks.filter(function (task) {
         return String(task.status).toLowerCase() === "completed";
-
     }).length;
 
     const pending = total - completed;
@@ -168,23 +227,11 @@ function updateDashboardStatistics(tasks) {
         ? Math.round((completed / total) * 100)
         : 0;
 
-
     // Update summary cards.
-
     const totalElement = document.getElementById("total-tasks");
-
-    const completedElement = document.getElementById(
-        "completed-tasks"
-    );
-
-    const pendingElement = document.getElementById(
-        "pending-tasks"
-    );
-
-    const rateElement = document.getElementById(
-        "completion-rate"
-    );
-
+    const completedElement = document.getElementById("completed-tasks");
+    const pendingElement = document.getElementById("pending-tasks");
+    const rateElement = document.getElementById("completion-rate");
 
     if (totalElement) {
         totalElement.textContent = total;
@@ -202,9 +249,7 @@ function updateDashboardStatistics(tasks) {
         rateElement.textContent = percentage + "%";
     }
 
-
     // Update progress details.
-
     const progressCompleted = document.getElementById(
         "progress-completed"
     );
@@ -225,7 +270,6 @@ function updateDashboardStatistics(tasks) {
         "progress-circle"
     );
 
-
     if (progressCompleted) {
         progressCompleted.textContent = completed;
     }
@@ -242,11 +286,8 @@ function updateDashboardStatistics(tasks) {
         progressPercentage.textContent = percentage + "%";
     }
 
-
     // Update circular progress.
-
     if (progressCircle) {
-
         const degrees = (percentage / 100) * 360;
 
         progressCircle.style.setProperty(
@@ -258,18 +299,15 @@ function updateDashboardStatistics(tasks) {
             "aria-valuenow",
             percentage
         );
-
     }
-
 }
 
 
 /* ==========================================
-   7. DISPLAY TODAY'S TASKS
+   8. DISPLAY TODAY'S TASKS
 ========================================== */
 
 function displayDashboardTaskList(tasks) {
-
     const taskList = document.getElementById(
         "dashboard-task-list"
     );
@@ -277,9 +315,7 @@ function displayDashboardTaskList(tasks) {
     if (!taskList) return;
 
     // Show a message if no tasks exist.
-
     if (tasks.length === 0) {
-
         taskList.innerHTML = `
             <div class="empty-task-message">
                 <i class="fa-solid fa-list-check"></i>
@@ -289,16 +325,12 @@ function displayDashboardTaskList(tasks) {
         `;
 
         return;
-
     }
 
-
     // Display up to five tasks on the dashboard.
-
     const visibleTasks = tasks.slice(0, 5);
 
-    taskList.innerHTML = visibleTasks.map(task => {
-
+    taskList.innerHTML = visibleTasks.map(function (task) {
         const isCompleted =
             String(task.status).toLowerCase() === "completed";
 
@@ -320,7 +352,6 @@ function displayDashboardTaskList(tasks) {
             safePriority.charAt(0).toUpperCase() +
             safePriority.slice(1);
 
-
         return `
             <div class="task-row ${isCompleted ? "completed" : ""}">
 
@@ -340,20 +371,16 @@ function displayDashboardTaskList(tasks) {
 
             </div>
         `;
-
     }).join("");
-
 }
 
 
 /* ==========================================
-   8. SAFELY DISPLAY TASK TEXT
+   9. SAFELY DISPLAY TASK TEXT
 ========================================== */
 
 function escapeDashboardHTML(value) {
-
-    return String(value).replace(/[&<>"']/g, character => {
-
+    return String(value).replace(/[&<>"']/g, function (character) {
         const entities = {
             "&": "&amp;",
             "<": "&lt;",
@@ -363,119 +390,84 @@ function escapeDashboardHTML(value) {
         };
 
         return entities[character];
-
     });
-
 }
 
 
 /* ==========================================
-   9. MOBILE SIDEBAR TOGGLE
+   10. MOBILE SIDEBAR TOGGLE
 ========================================== */
 
 function setupDashboardSidebar() {
-
     const menuButton = document.getElementById("menu-toggle");
-
     const sidebar = document.querySelector(".sidebar");
 
     if (!menuButton || !sidebar) return;
 
-
     menuButton.addEventListener("click", function () {
-
         sidebar.classList.toggle("open");
-
     });
-
 
     // Close the sidebar when a navigation link is selected.
-
     const navigationLinks = sidebar.querySelectorAll(".nav-link");
 
-    navigationLinks.forEach(link => {
-
+    navigationLinks.forEach(function (link) {
         link.addEventListener("click", function () {
-
             sidebar.classList.remove("open");
-
         });
-
     });
 
-
-    // Close the sidebar when clicking outside it on mobile.
-
+    // Close the sidebar when clicking outside on mobile.
     document.addEventListener("click", function (event) {
-
         if (window.innerWidth > 768) return;
 
         if (
             !sidebar.contains(event.target) &&
             !menuButton.contains(event.target)
         ) {
-
             sidebar.classList.remove("open");
-
         }
-
     });
-
 }
 
 
 /* ==========================================
-   10. INITIALIZE DASHBOARD
+   11. INITIALIZE DASHBOARD
 ========================================== */
 
 function initializeDashboard() {
-
     displayDashboardDate();
-
     displayFooterYear();
-
     displayWelcomeGreeting();
-
     setupDashboardSidebar();
-
+    setupDashboardTaskCompletion();
     loadDashboardTasks();
-
 }
 
 
 /* ==========================================
-   11. START DASHBOARD
+   12. START DASHBOARD
 ========================================== */
 
 if (document.readyState === "loading") {
-
     document.addEventListener(
         "DOMContentLoaded",
         initializeDashboard
     );
-
 } else {
-
     initializeDashboard();
-
 }
 
 
-/* =====================================
-   FOCUS ROOM TIMER
-===================================== */
+/* ============================================================
+   13. FOCUS ROOM TIMER
+============================================================ */
 
-(function () {
+document.addEventListener("DOMContentLoaded", function () {
     const timerDisplay = document.getElementById("timer-display");
 
     // Run only on the Focus Room page.
-    if (!timerDisplay) {
-        return;
-    }
-
-    const timerCircle = document.getElementById("timer-circle");
-    const timerStatus = document.getElementById("timer-status");
-    const timerMessage = document.getElementById("timer-message");
+    if (!timerDisplay) return;
 
     const startButton = document.getElementById("start-timer");
     const pauseButton = document.getElementById("pause-timer");
@@ -483,131 +475,135 @@ if (document.readyState === "loading") {
 
     const modeButtons = document.querySelectorAll(".timer-mode");
 
-    const completedSessionsElement =
-        document.getElementById("completed-sessions");
-
-    const focusMinutesElement =
-        document.getElementById("focus-minutes");
-
-    const focusDateElement = document.getElementById("focus-date");
-    const footerYearElement = document.getElementById("footer-year");
-
-    let selectedMinutes = 25;
-    let remainingSeconds = selectedMinutes * 60;
     let timerInterval = null;
+    let timeLeft = 25 * 60;
     let isRunning = false;
+    let currentMode = "pomodoro";
 
-    let completedSessions = 0;
-    let focusMinutes = 0;
+    const timerModes = {
+        pomodoro: 25 * 60,
+        short: 5 * 60,
+        long: 15 * 60
+    };
 
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
-        const remaining = seconds % 60;
+        const remainingSeconds = seconds % 60;
 
-        return String(minutes).padStart(2, "0") +
+        return (
+            String(minutes).padStart(2, "0") +
             ":" +
-            String(remaining).padStart(2, "0");
+            String(remainingSeconds).padStart(2, "0")
+        );
     }
 
     function updateTimerDisplay() {
-        timerDisplay.textContent = formatTime(remainingSeconds);
-
-        const totalSeconds = selectedMinutes * 60;
-        const elapsedSeconds = totalSeconds - remainingSeconds;
-
-        const progress = totalSeconds > 0
-            ? Math.max(0, Math.min(1, elapsedSeconds / totalSeconds))
-            : 0;
-
-        const degrees = progress * 360;
-
-        timerCircle.style.background =
-            `conic-gradient(var(--sage-dark, #52745b) ${degrees}deg,
-            var(--sage-light, #e4eee5) ${degrees}deg)`;
+        timerDisplay.textContent = formatTime(timeLeft);
     }
 
     function updateButtons() {
-        startButton.disabled = isRunning;
-        pauseButton.disabled = !isRunning;
+        if (startButton) {
+            startButton.disabled = isRunning;
+        }
+
+        if (pauseButton) {
+            pauseButton.disabled = !isRunning;
+        }
     }
 
     function stopTimer() {
         clearInterval(timerInterval);
+
         timerInterval = null;
         isRunning = false;
+
         updateButtons();
     }
 
     function startTimer() {
-        if (isRunning) {
-            return;
-        }
+        if (isRunning) return;
 
-        if (remainingSeconds <= 0) {
-            remainingSeconds = selectedMinutes * 60;
-            updateTimerDisplay();
+        if (timeLeft <= 0) {
+            timeLeft = timerModes[currentMode];
         }
 
         isRunning = true;
-        timerStatus.textContent = "Stay focused!";
-        timerMessage.textContent = "Keep going. You are making progress.";
-
         updateButtons();
 
         timerInterval = setInterval(function () {
-            remainingSeconds--;
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateTimerDisplay();
 
-            updateTimerDisplay();
-
-            if (remainingSeconds <= 0) {
+            } else {
                 stopTimer();
-                timerStatus.textContent = "Session complete!";
-                timerMessage.textContent =
-                    "Well done! Take a moment to recharge.";
 
-                if (selectedMinutes === 25 || selectedMinutes === 50) {
-                    completedSessions++;
-                    focusMinutes += selectedMinutes;
+                // Save completed focus sessions for Analytics.
+                if (currentMode === "pomodoro") {
+                    try {
+                        const history = JSON.parse(
+                            localStorage.getItem(
+                                "focusFlowFocusHistory"
+                            ) || "[]"
+                        );
 
-                    completedSessionsElement.textContent =
-                        completedSessions;
+                        const now = new Date();
 
-                    focusMinutesElement.textContent = focusMinutes;
+                        const today =
+                            `${now.getFullYear()}-` +
+                            `${String(now.getMonth() + 1).padStart(2, "0")}-` +
+                            `${String(now.getDate()).padStart(2, "0")}`;
+
+                        history.push({
+                            date: today,
+                            minutes: 25,
+                            completedAt: now.toISOString()
+                        });
+
+                        localStorage.setItem(
+                            "focusFlowFocusHistory",
+                            JSON.stringify(history)
+                        );
+
+                    } catch (error) {
+                        console.error(
+                            "Could not save focus history:",
+                            error
+                        );
+                    }
                 }
 
-                alert("Your timer is complete! Great work!");
+                alert("Focus session completed! Great work!");
             }
         }, 1000);
     }
 
     function pauseTimer() {
-        if (!isRunning) {
-            return;
-        }
-
         stopTimer();
-
-        timerStatus.textContent = "Timer paused";
-        timerMessage.textContent = "Take your time. Resume when ready.";
     }
 
     function resetTimer() {
         stopTimer();
 
-        remainingSeconds = selectedMinutes * 60;
-
-        timerStatus.textContent = "Ready to focus?";
-        timerMessage.textContent =
-            "Choose a session and start when you're ready.";
+        timeLeft = timerModes[currentMode];
 
         updateTimerDisplay();
     }
 
     function selectMode(button) {
+        const selectedMode = button.dataset.mode ||
+            (
+                button.dataset.minutes === "25" ? "pomodoro" :
+                button.dataset.minutes === "5" ? "short" :
+                button.dataset.minutes === "15" ? "long" : ""
+            );
+
+        if (!timerModes[selectedMode]) return;
+
         stopTimer();
 
-        selectedMinutes = Number(button.dataset.minutes);
-        remainingSeconds = selectedMinutes * 60;
+        currentMode = selectedMode;
+        timeLeft = timerModes[currentMode];
 
         modeButtons.forEach(function (modeButton) {
             modeButton.classList.remove("active");
@@ -615,12 +611,19 @@ if (document.readyState === "loading") {
 
         button.classList.add("active");
 
-        timerStatus.textContent = "Ready to focus?";
-        timerMessage.textContent =
-            "Your " + button.textContent.trim() +
-            " session is ready.";
-
         updateTimerDisplay();
+    }
+
+    if (startButton) {
+        startButton.addEventListener("click", startTimer);
+    }
+
+    if (pauseButton) {
+        pauseButton.addEventListener("click", pauseTimer);
+    }
+
+    if (resetButton) {
+        resetButton.addEventListener("click", resetTimer);
     }
 
     modeButtons.forEach(function (button) {
@@ -629,38 +632,20 @@ if (document.readyState === "loading") {
         });
     });
 
-    startButton.addEventListener("click", startTimer);
-    pauseButton.addEventListener("click", pauseTimer);
-    resetButton.addEventListener("click", resetTimer);
-
-    if (focusDateElement) {
-        focusDateElement.textContent =
-            new Date().toLocaleDateString("en-IN", {
-                day: "numeric",
-                month: "short",
-                year: "numeric"
-            });
-    }
-
-    if (footerYearElement) {
-        footerYearElement.textContent = new Date().getFullYear();
-    }
-
     updateTimerDisplay();
     updateButtons();
-})();
+});
 
-/* ==========================================
-   FOCUSFLOW - TASK MANAGER
-========================================== */
+
+/* ============================================================
+   14. TASK MANAGER
+============================================================ */
 
 (function () {
     const taskForm = document.getElementById("task-form");
 
-    // Run only on tasks.html
-    if (!taskForm) {
-        return;
-    }
+    // Run only on tasks.html.
+    if (!taskForm) return;
 
     const API_URL =
         "https://6ac5df0dbea0e72cf5c8261e.mockapi.io/FocusFlowTask";
@@ -691,7 +676,7 @@ if (document.readyState === "loading") {
     let isLoading = false;
     let isSaving = false;
 
-    // Display today's date
+    // Display today's date.
     if (dateElement) {
         dateElement.textContent = new Date().toLocaleDateString("en-IN", {
             day: "numeric",
@@ -700,12 +685,12 @@ if (document.readyState === "loading") {
         });
     }
 
-    // Display current year
+    // Display current year.
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
 
-    // Safely display text inside HTML
+    // Safely display text inside HTML.
     function escapeHTML(value) {
         return String(value ?? "").replace(/[&<>"']/g, function (character) {
             const characters = {
@@ -720,23 +705,24 @@ if (document.readyState === "loading") {
         });
     }
 
-    // Normalize task status
+    // Check task status.
     function isTaskCompleted(task) {
         return String(task.status ?? "").toLowerCase() === "completed";
     }
 
-    // Display form messages
+    // Display form messages.
     function showMessage(message, type) {
+        if (!messageElement) return;
+
         messageElement.textContent = message;
+
         messageElement.style.color =
             type === "success" ? "#43784d" : "#b34337";
     }
 
-    // Load tasks from MockAPI
+    // Load tasks from MockAPI.
     async function loadTasks() {
-        if (isLoading) {
-            return;
-        }
+        if (isLoading) return;
 
         isLoading = true;
 
@@ -751,16 +737,17 @@ if (document.readyState === "loading") {
             const response = await fetch(API_URL);
 
             if (!response.ok) {
-                throw new Error("Unable to load tasks from the server.");
+                throw new Error("Unable to load tasks.");
             }
 
             const data = await response.json();
 
             if (!Array.isArray(data)) {
-                throw new Error("The API did not return a task list.");
+                throw new Error("Invalid task list.");
             }
 
             tasks = data;
+
             updateStatistics();
             renderTasks();
 
@@ -769,10 +756,8 @@ if (document.readyState === "loading") {
 
             taskList.innerHTML = `
                 <div class="task-error">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <p>Unable to load tasks. Check your internet connection and API URL.</p>
-                    <button type="button" class="refresh-tasks-button"
-                            id="retry-load-tasks">
+                    <p>Unable to load tasks. Check your internet connection.</p>
+                    <button type="button" id="retry-load-tasks">
                         Try Again
                     </button>
                 </div>
@@ -780,15 +765,19 @@ if (document.readyState === "loading") {
 
             resultCount.textContent = "Tasks could not be loaded.";
 
-            document.getElementById("retry-load-tasks")
-                .addEventListener("click", loadTasks);
+            const retryButton =
+                document.getElementById("retry-load-tasks");
+
+            if (retryButton) {
+                retryButton.addEventListener("click", loadTasks);
+            }
 
         } finally {
             isLoading = false;
         }
     }
 
-    // Update task statistics
+    // Update task statistics.
     function updateStatistics() {
         const completedTasks = tasks.filter(isTaskCompleted).length;
         const pendingTasks = tasks.length - completedTasks;
@@ -798,15 +787,20 @@ if (document.readyState === "loading") {
         pendingElement.textContent = pendingTasks;
     }
 
-    // Render filtered tasks
+    // Render filtered tasks.
     function renderTasks() {
         const searchText = taskSearch.value.trim().toLowerCase();
         const selectedStatus = statusFilter.value;
         const selectedPriority = priorityFilter.value;
 
         const filteredTasks = tasks.filter(function (task) {
-            const name = String(task.name ?? task.title ?? "").toLowerCase();
-            const description = String(task.description ?? "").toLowerCase();
+            const name = String(
+                task.name ?? task.title ?? ""
+            ).toLowerCase();
+
+            const description = String(
+                task.description ?? ""
+            ).toLowerCase();
 
             const matchesSearch =
                 name.includes(searchText) ||
@@ -819,8 +813,9 @@ if (document.readyState === "loading") {
                 (selectedStatus === "completed" && completed) ||
                 (selectedStatus === "pending" && !completed);
 
-            const taskPriority =
-                String(task.priority ?? "Medium").toLowerCase();
+            const taskPriority = String(
+                task.priority ?? "Medium"
+            ).toLowerCase();
 
             const matchesPriority =
                 selectedPriority === "all" ||
@@ -844,9 +839,17 @@ if (document.readyState === "loading") {
 
         taskList.innerHTML = filteredTasks.map(function (task) {
             const completed = isTaskCompleted(task);
-            const name = escapeHTML(task.name ?? task.title ?? "Untitled task");
-            const description = escapeHTML(task.description ?? "");
+
+            const name = escapeHTML(
+                task.name ?? task.title ?? "Untitled task"
+            );
+
+            const description = escapeHTML(
+                task.description ?? ""
+            );
+
             const priority = String(task.priority ?? "Medium");
+
             const safePriority = ["high", "medium", "low"]
                 .includes(priority.toLowerCase())
                 ? priority.toLowerCase()
@@ -861,13 +864,6 @@ if (document.readyState === "loading") {
             return `
                 <article class="task-row ${completed ? "completed" : ""}"
                          data-task-id="${taskId}">
-
-                    <input
-                        type="checkbox"
-                        class="task-complete-checkbox"
-                        data-id="${taskId}"
-                        aria-label="Mark ${name} as completed"
-                        ${completed ? "checked" : ""}>
 
                     <div class="task-row-content">
                         <h3>${name}</h3>
@@ -893,16 +889,37 @@ if (document.readyState === "loading") {
                     </div>
 
                     <div class="task-row-actions">
+
+                        <button
+                            type="button"
+                            class="task-action-button complete-task-button"
+                            data-id="${taskId}"
+                            title="${completed ? "Mark as pending" : "Complete task"}">
+                            <i class="fa-solid ${completed
+                                ? "fa-rotate-left"
+                                : "fa-check"}"></i>
+                            ${completed ? "Undo" : "Complete"}
+                        </button>
+
+                        <button
+                            type="button"
+                            class="task-action-button edit-task-button"
+                            data-id="${taskId}"
+                            title="Edit task">
+                            <i class="fa-solid fa-pen"></i>
+                            Edit
+                        </button>
+
                         <button
                             type="button"
                             class="task-action-button delete delete-task-button"
                             data-id="${taskId}"
-                            aria-label="Delete ${name}"
                             title="Delete task">
                             <i class="fa-solid fa-trash"></i>
+                            Delete
                         </button>
-                    </div>
 
+                    </div>
                 </article>
             `;
         }).join("");
@@ -911,13 +928,15 @@ if (document.readyState === "loading") {
             `Showing ${filteredTasks.length} of ${tasks.length} tasks`;
     }
 
-    // Add a task to MockAPI
+
+    /* ==========================================
+       ADD A NEW TASK
+    ========================================== */
+
     taskForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        if (isSaving) {
-            return;
-        }
+        if (isSaving) return;
 
         const name = taskName.value.trim();
 
@@ -937,6 +956,7 @@ if (document.readyState === "loading") {
 
         isSaving = true;
         addButton.disabled = true;
+
         showMessage("Saving your task...", "success");
 
         try {
@@ -954,11 +974,9 @@ if (document.readyState === "loading") {
 
             const savedTask = await response.json();
 
-            // Use the server response to avoid duplicate submissions.
             tasks.unshift(savedTask);
 
             taskForm.reset();
-
             taskPriority.value = "Medium";
 
             updateStatistics();
@@ -980,134 +998,278 @@ if (document.readyState === "loading") {
         }
     });
 
-    // Mark a task as completed or pending
-    taskList.addEventListener("change", async function (event) {
-        const checkbox = event.target.closest(".task-complete-checkbox");
 
-        if (!checkbox) {
-            return;
-        }
+    /* ==========================================
+       COMPLETE, EDIT AND DELETE TASKS
+    ========================================== */
 
-        const taskId = checkbox.dataset.id;
+    taskList.addEventListener("click", async function (event) {
+        const button = event.target.closest(
+            ".complete-task-button, .edit-task-button, .delete-task-button"
+        );
+
+        if (!button) return;
+
+        const taskId = button.dataset.id;
+
         const task = tasks.find(function (item) {
             return String(item.id) === String(taskId);
         });
 
         if (!task) {
+            showMessage("Task not found. Please refresh.", "error");
             return;
         }
 
-        checkbox.disabled = true;
 
-        const previousStatus = task.status;
-        const newStatus = checkbox.checked ? "completed" : "pending";
+        /* ==========================================
+           1. COMPLETE OR UNDO TASK
+        ========================================== */
 
-        try {
-            const response = await fetch(
-                `${API_URL}/${encodeURIComponent(taskId)}`,
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        ...task,
-                        status: newStatus
-                    })
+        if (button.classList.contains("complete-task-button")) {
+            const newStatus = isTaskCompleted(task)
+                ? "pending"
+                : "completed";
+
+            const now = new Date();
+
+            const completedDate =
+                `${now.getFullYear()}-` +
+                `${String(now.getMonth() + 1).padStart(2, "0")}-` +
+                `${String(now.getDate()).padStart(2, "0")}`;
+
+            button.disabled = true;
+
+            try {
+                const response = await fetch(
+                    `${API_URL}/${encodeURIComponent(taskId)}`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            ...task,
+                            status: newStatus,
+                            completedAt: newStatus === "completed"
+                                ? completedDate
+                                : null
+                        })
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Unable to update task.");
                 }
+
+                const updatedTask = await response.json();
+
+                tasks = tasks.map(function (item) {
+                    return String(item.id) === String(taskId)
+                        ? updatedTask
+                        : item;
+                });
+
+                updateStatistics();
+                renderTasks();
+
+                showMessage(
+                    newStatus === "completed"
+                        ? "Task completed successfully!"
+                        : "Task moved back to pending.",
+                    "success"
+                );
+
+            } catch (error) {
+                console.error("Complete task error:", error);
+
+                showMessage(
+                    "Unable to update task. Please try again.",
+                    "error"
+                );
+
+                button.disabled = false;
+            }
+        }
+
+
+        /* ==========================================
+           2. EDIT TASK
+        ========================================== */
+
+        else if (button.classList.contains("edit-task-button")) {
+            const newName = prompt(
+                "Enter task name:",
+                task.name || task.title || ""
             );
 
-            if (!response.ok) {
-                throw new Error("Unable to update the task.");
+            if (newName === null) return;
+
+            if (!newName.trim()) {
+                alert("Task name cannot be empty.");
+                return;
             }
 
-            const updatedTask = await response.json();
+            const newDescription = prompt(
+                "Enter task description:",
+                task.description || ""
+            );
 
-            tasks = tasks.map(function (item) {
-                return String(item.id) === String(taskId)
-                    ? updatedTask
-                    : item;
-            });
+            if (newDescription === null) return;
 
-            updateStatistics();
-            renderTasks();
+            const newPriority = prompt(
+                "Enter priority: High, Medium or Low",
+                task.priority || "Medium"
+            );
 
-        } catch (error) {
-            console.error("Update task error:", error);
+            if (newPriority === null) return;
 
-            task.status = previousStatus;
+            const priority = newPriority.trim().toLowerCase();
 
-            alert("Could not update the task. Please try again.");
+            if (!["high", "medium", "low"].includes(priority)) {
+                alert("Please enter High, Medium or Low.");
+                return;
+            }
 
-            renderTasks();
+            const newDueDate = prompt(
+                "Enter due date (YYYY-MM-DD), or leave blank:",
+                task.dueDate || ""
+            );
 
+            if (newDueDate === null) return;
+
+            button.disabled = true;
+
+            try {
+                const response = await fetch(
+                    `${API_URL}/${encodeURIComponent(taskId)}`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            ...task,
+                            name: newName.trim(),
+                            description: newDescription.trim(),
+                            priority:
+                                priority.charAt(0).toUpperCase() +
+                                priority.slice(1),
+                            dueDate: newDueDate.trim()
+                        })
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Unable to save task changes.");
+                }
+
+                const updatedTask = await response.json();
+
+                tasks = tasks.map(function (item) {
+                    return String(item.id) === String(taskId)
+                        ? updatedTask
+                        : item;
+                });
+
+                updateStatistics();
+                renderTasks();
+
+                showMessage("Task updated successfully!", "success");
+
+            } catch (error) {
+                console.error("Edit task error:", error);
+
+                showMessage(
+                    "Unable to edit task. Please try again.",
+                    "error"
+                );
+
+                button.disabled = false;
+            }
+        }
+
+
+        /* ==========================================
+           3. DELETE TASK
+        ========================================== */
+
+        else if (button.classList.contains("delete-task-button")) {
+            const confirmed = confirm(
+                "Are you sure you want to delete this task?"
+            );
+
+            if (!confirmed) return;
+
+            button.disabled = true;
+
+            try {
+                const response = await fetch(
+                    `${API_URL}/${encodeURIComponent(taskId)}`,
+                    {
+                        method: "DELETE"
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Unable to delete task.");
+                }
+
+                tasks = tasks.filter(function (item) {
+                    return String(item.id) !== String(taskId);
+                });
+
+                updateStatistics();
+                renderTasks();
+
+                showMessage("Task deleted successfully!", "success");
+
+            } catch (error) {
+                console.error("Delete task error:", error);
+
+                showMessage(
+                    "Unable to delete task. Please try again.",
+                    "error"
+                );
+
+                button.disabled = false;
+            }
         }
     });
 
-    // Delete a task from MockAPI
-    taskList.addEventListener("click", async function (event) {
-        const deleteButton = event.target.closest(".delete-task-button");
 
-        if (!deleteButton) {
-            return;
-        }
+    /* ==========================================
+       SEARCH TASKS
+    ========================================== */
 
-        const taskId = deleteButton.dataset.id;
-
-        const confirmed = confirm(
-            "Are you sure you want to delete this task?"
-        );
-
-        if (!confirmed) {
-            return;
-        }
-
-        deleteButton.disabled = true;
-
-        try {
-            const response = await fetch(
-                `${API_URL}/${encodeURIComponent(taskId)}`,
-                {
-                    method: "DELETE"
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error("Unable to delete the task.");
-            }
-
-            tasks = tasks.filter(function (task) {
-                return String(task.id) !== String(taskId);
-            });
-
-            updateStatistics();
-            renderTasks();
-
-            showMessage("Task deleted successfully.", "success");
-
-        } catch (error) {
-            console.error("Delete task error:", error);
-
-            alert("Could not delete the task. Please try again.");
-
-            deleteButton.disabled = false;
-        }
-    });
-
-    // Search tasks
     taskSearch.addEventListener("input", renderTasks);
 
-    // Filter by status
+
+    /* ==========================================
+       FILTER TASKS BY STATUS
+    ========================================== */
+
     statusFilter.addEventListener("change", renderTasks);
 
-    // Filter by priority
+
+    /* ==========================================
+       FILTER TASKS BY PRIORITY
+    ========================================== */
+
     priorityFilter.addEventListener("change", renderTasks);
 
-    // Refresh task list from server
+
+    /* ==========================================
+       REFRESH TASKS
+    ========================================== */
+
     refreshButton.addEventListener("click", loadTasks);
 
-    // Load saved tasks when the page opens
+
+    /* ==========================================
+       LOAD TASKS WHEN PAGE OPENS
+    ========================================== */
+
     loadTasks();
 
 })();
-

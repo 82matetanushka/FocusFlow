@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>FocusFlow | Task Manager</title>
+            <!--Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="Favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Favicon/favicon-16x16.png">
+    <link rel="manifest" href="Favicon/site.webmanifest">
+
+
 
     <link rel="stylesheet" href="CSS/styles.css">
 
@@ -58,9 +65,19 @@
 
         </nav>
 
-        <div class="sidebar-bottom">
-            <p>Small steps, big progress!</p>
-        </div>
+                    <!-- Sidebar Footer -->
+            <div class="sidebar-footer">
+
+                <div class="sidebar-quote">
+                    <i class="fa-solid fa-heart"
+                       style="color: rgb(113, 178, 163);"></i>
+
+                    <h3>Better Focus</h3>
+                    <p>Bigger Dreams</p>
+                </div>
+
+            </div>
+
 
     </aside>
 
@@ -80,7 +97,26 @@
                 <p>Plan your work and make progress every day.</p>
             </div>
 
-            <div class="header-date" id="tasks-date"></div>
+            <div class="header-right">
+
+                    <div class="current-date">
+                        <i class="fa-solid fa-calendar"
+                           style="color: rgb(113, 178, 163);"></i>
+
+                        <span id="current-date">
+                            Today's Date
+                        </span>
+                    </div>
+                     <button
+                        type="button"
+                        class="profile-button"
+                        aria-label="User profile">
+
+                        <i class="fa-solid fa-user"
+                           style="color: rgb(113, 178, 163);"></i>
+
+                    </button>
+            </div>
 
         </header>
 
